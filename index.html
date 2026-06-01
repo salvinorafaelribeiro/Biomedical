@@ -3,140 +3,463 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Follow-up Biomedical — 2026-06-01</title>
+<title>Follow-up Biomedical — 01/06/2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:'Segoe UI',Arial,sans-serif;background:#F4F6F9;color:#16325C;font-size:14px}
-  #stale-banner{display:none;background:#FE9339;color:#fff;text-align:center;
-                 padding:10px;font-weight:600;font-size:13px;letter-spacing:.3px}
-  header{background:#16325C;color:#fff;padding:18px 32px;display:flex;align-items:center;gap:16px}
-  header h1{font-size:20px;font-weight:600}
-  header span{font-size:13px;opacity:.75;margin-left:auto}
-  .cards{display:flex;flex-wrap:wrap;gap:16px;padding:24px 32px 8px}
-  .card{background:#fff;border-radius:8px;padding:20px 24px;min-width:160px;flex:1;
-          box-shadow:0 1px 4px rgba(0,0,0,.08)}
-  .card-title{font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#54697D;margin-bottom:6px}
-  .card-value{font-size:32px;font-weight:700;line-height:1}
-  .card-sub{font-size:11px;color:#54697D;margin-top:4px}
-  section{margin:0 32px 24px;background:#fff;border-radius:8px;
-           box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden}
-  section h2{padding:14px 20px;font-size:14px;font-weight:600;border-bottom:1px solid #E5E5E5;
-              display:flex;align-items:center;gap:8px}
-  section h2 .count{background:#E8F4FE;color:#0070D2;font-size:11px;padding:2px 8px;border-radius:10px}
-  section h2 .warn{background:#FDEDE3;color:#C23934;font-size:11px;padding:2px 8px;border-radius:10px}
-  table{width:100%;border-collapse:collapse}
-  th{background:#F4F6F9;padding:9px 14px;text-align:left;font-size:12px;
-      font-weight:600;color:#54697D;border-bottom:1px solid #E5E5E5}
-  td{padding:9px 14px;border-bottom:1px solid #F4F6F9;vertical-align:middle}
-  tr:last-child td{border-bottom:none}
-  tr:hover td{background:#F8FAFC}
-  td.bold{font-weight:600}
-  td.center{text-align:center}
-  td.right{text-align:right}
-  .badge{display:inline-block;padding:2px 10px;border-radius:12px;
-          color:#fff;font-size:11px;font-weight:600}
-  .empty{padding:20px;color:#54697D;font-style:italic}
-  footer{text-align:center;padding:16px;font-size:11px;color:#8A9BB0}
-  .grid2-wrap{margin:0 32px 24px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .grid2-wrap section{margin:0}
+:root {
+  --bg:#F0F4F8; --surface:#fff; --border:#E2E8F0;
+  --txt:#0F172A; --txt2:#64748B; --txt3:#94A3B8;
+  --navy:#0B1E3E; --navy2:#1A3660;
+  --blue:#2563EB;  --blue-l:#EFF6FF;
+  --green:#059669; --green-l:#ECFDF5;
+  --red:#DC2626;   --red-l:#FEF2F2;
+  --amber:#D97706; --amber-l:#FFFBEB;
+  --r:10px;
+  --s1:0 1px 3px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04);
+  --s2:0 4px 12px rgba(0,0,0,.08),0 2px 4px rgba(0,0,0,.04);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--txt);font-size:13.5px;line-height:1.5}
+
+/* ── Stale banner ── */
+#stale-banner{display:none;background:linear-gradient(135deg,#F59E0B,#B45309);color:#fff;
+  text-align:center;padding:11px 20px;font-weight:600;font-size:13px;letter-spacing:.2px}
+
+/* ── Header ── */
+header{background:linear-gradient(135deg,var(--navy) 0%,var(--navy2) 100%);
+  position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.25)}
+.hdr{display:flex;align-items:center;padding:16px 32px;gap:16px}
+.hdr-icon{width:42px;height:42px;background:rgba(255,255,255,.1);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.hdr-title{font-size:17px;font-weight:700;color:#fff;letter-spacing:-.3px}
+.hdr-sub{font-size:11.5px;color:rgba(255,255,255,.45);margin-top:1px}
+.hdr-meta{margin-left:auto;text-align:right}
+.hdr-date{font-size:13px;font-weight:600;color:rgba(255,255,255,.9)}
+.hdr-count{font-size:11px;color:rgba(255,255,255,.45);margin-top:2px}
+nav{background:rgba(0,0,0,.15);border-top:1px solid rgba(255,255,255,.06);
+  padding:0 28px;display:flex;gap:2px;overflow-x:auto}
+nav a{color:rgba(255,255,255,.55);text-decoration:none;font-size:12px;font-weight:500;
+  padding:9px 14px;border-bottom:2px solid transparent;white-space:nowrap;
+  transition:color .15s,border-color .15s}
+nav a:hover{color:#fff;border-bottom-color:rgba(255,255,255,.4)}
+
+/* ── Main ── */
+main{max-width:1380px;margin:0 auto;padding:28px 32px}
+
+/* ── KPI grid ── */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:24px}
+@media(max-width:1100px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:640px){.kpi-grid{grid-template-columns:repeat(2,1fr)}}
+.kpi-card{background:var(--surface);border-radius:var(--r);padding:18px 18px 14px;
+  box-shadow:var(--s1);border-top:3px solid transparent;position:relative;overflow:hidden;
+  transition:transform .15s,box-shadow .15s;cursor:default}
+.kpi-card:hover{transform:translateY(-2px);box-shadow:var(--s2)}
+.kpi-card.blue {border-top-color:var(--blue)}
+.kpi-card.green{border-top-color:var(--green)}
+.kpi-card.red  {border-top-color:var(--red)}
+.kpi-card.amber{border-top-color:var(--amber)}
+.kpi-icon{position:absolute;top:12px;right:14px;font-size:28px;opacity:.12;
+  transform:rotate(-10deg) scale(1.5);pointer-events:none}
+.kpi-label{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.7px;
+  color:var(--txt2);margin-bottom:8px}
+.kpi-value{font-size:36px;font-weight:800;line-height:1;letter-spacing:-1.5px}
+.kpi-card.blue  .kpi-value{color:var(--blue)}
+.kpi-card.green .kpi-value{color:var(--green)}
+.kpi-card.red   .kpi-value{color:var(--red)}
+.kpi-card.amber .kpi-value{color:var(--amber)}
+.kpi-sub{font-size:11px;color:var(--txt3);margin-top:5px}
+
+/* ── Sections ── */
+.section{background:var(--surface);border-radius:var(--r);box-shadow:var(--s1);margin-bottom:20px;overflow:hidden}
+.sec-hdr{display:flex;align-items:center;gap:10px;padding:14px 20px;
+  border-bottom:1px solid var(--border)}
+.sec-icon{font-size:16px}
+.sec-title{font-size:14px;font-weight:600}
+.sec-badge{margin-left:auto;font-size:11px;font-weight:600;padding:3px 11px;border-radius:20px}
+.sec-badge.blue {background:var(--blue-l); color:var(--blue)}
+.sec-badge.green{background:var(--green-l);color:var(--green)}
+.sec-badge.red  {background:var(--red-l);  color:var(--red)}
+.sec-badge.amber{background:var(--amber-l);color:var(--amber)}
+
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px}
+.grid-2 .section{margin-bottom:0}
+@media(max-width:860px){.grid-2{grid-template-columns:1fr}}
+
+/* ── Tables ── */
+.table-wrap{overflow-x:auto}
+.table-wrap.scrollable{max-height:380px;overflow-y:auto}
+table{width:100%;border-collapse:collapse}
+thead th{background:#F8FAFC;padding:10px 16px;text-align:left;font-size:11px;
+  font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);
+  border-bottom:1px solid var(--border);white-space:nowrap;position:sticky;top:0;z-index:1}
+tbody td{padding:10px 16px;border-bottom:1px solid #F8FAFC;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover td{background:#F8FAFC}
+td.mono{font-family:'SFMono-Regular',Consolas,monospace;font-size:12px;color:var(--txt2)}
+td.bold{font-weight:600}
+td.dim {color:var(--txt2);font-size:12.5px}
+
+/* ── Badges ── */
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;
+  font-size:11px;font-weight:600;white-space:nowrap}
+.badge-blue        {background:var(--blue-l); color:var(--blue)}
+.badge-green       {background:var(--green-l);color:var(--green)}
+.badge-red         {background:var(--red-l);  color:var(--red)}
+.badge-amber       {background:var(--amber-l);color:var(--amber)}
+.badge-solid-green {background:var(--green);  color:#fff}
+.badge-solid-red   {background:var(--red);    color:#fff}
+.badge-solid-blue  {background:var(--blue);   color:#fff}
+
+/* ── Phase pills ── */
+.phase{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;
+  border-radius:20px;font-size:11px;font-weight:500}
+.phase::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor;opacity:.7}
+.phase-transito  {background:#EFF6FF;color:#2563EB}
+.phase-enviado   {background:#FFFBEB;color:#D97706}
+.phase-sistema   {background:#F5F3FF;color:#7C3AED}
+.phase-disponivel{background:#ECFDF5;color:#059669}
+
+/* ── Empty state ── */
+.empty-state{padding:40px 20px;text-align:center}
+.empty-icon{font-size:30px;margin-bottom:8px;opacity:.4}
+.empty-text{font-size:13px;font-style:italic;color:var(--txt3)}
+
+/* ── Truncate note ── */
+.truncate-note{padding:10px 20px;font-size:12px;color:var(--txt3);
+  border-top:1px solid var(--border);background:#FAFAFA}
+
+/* ── Fornecedor bars ── */
+.forn-row{display:flex;align-items:center;padding:12px 20px;
+  border-bottom:1px solid #F8FAFC;gap:16px}
+.forn-row:last-child{border-bottom:none}
+.forn-row:hover{background:#F8FAFC}
+.forn-name{width:220px;flex-shrink:0;font-size:13px;font-weight:500;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.forn-bars{flex:1;display:flex;flex-direction:column;gap:5px}
+.bar-row{display:flex;align-items:center;gap:10px}
+.bar-lbl{font-size:10px;color:var(--txt3);width:38px;text-align:right;flex-shrink:0}
+.bar-track{flex:1;height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.bar-fill{height:100%;border-radius:3px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+.bar-fill.blue {background:var(--blue)}
+.bar-fill.green{background:var(--green)}
+.bar-val{font-size:12px;font-weight:600;width:80px;text-align:right;flex-shrink:0}
+.bar-val.blue {color:var(--blue)}
+.bar-val.green{color:var(--green)}
+
+/* ── Footer ── */
+footer{text-align:center;padding:22px;font-size:11.5px;color:var(--txt3);
+  border-top:1px solid var(--border);margin-top:8px}
+
+/* ── Animations ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.kpi-card,.section{animation:fadeUp .35s ease both}
+.kpi-card:nth-child(1){animation-delay:.04s}.kpi-card:nth-child(2){animation-delay:.08s}
+.kpi-card:nth-child(3){animation-delay:.12s}.kpi-card:nth-child(4){animation-delay:.16s}
+.kpi-card:nth-child(5){animation-delay:.20s}.kpi-card:nth-child(6){animation-delay:.24s}
 </style>
-<script>
-  // Aviso automático se o arquivo não foi atualizado hoje
-  window.addEventListener('DOMContentLoaded', function() {
-    var fileDate = new Date('2026-06-01');
-    var today    = new Date();
-    today.setHours(0,0,0,0);
-    fileDate.setHours(0,0,0,0);
-    var diffDays = Math.round((today - fileDate) / 86400000);
-    if (diffDays > 0) {
-      var b = document.getElementById('stale-banner');
-      b.style.display = 'block';
-      b.textContent = '⚠️  Este dashboard tem ' + diffDays + ' dia(s) — dados de 2026-06-01. Substitua pelo arquivo de hoje.';
-    }
-  });
-</script>
 </head>
 <body>
 
 <div id="stale-banner"></div>
 
 <header>
-  <div>
-    <h1>&#128203; Follow-up Biomedical</h1>
+  <div class="hdr">
+    <div class="hdr-icon">📋</div>
+    <div>
+      <div class="hdr-title">Follow-up Biomedical</div>
+      <div class="hdr-sub">Importações · Análise Diária</div>
+    </div>
+    <div class="hdr-meta">
+      <div class="hdr-date">📅 01/06/2026</div>
+      <div class="hdr-count">395 ordens ativas</div>
+    </div>
   </div>
-  <span>Gerado em 2026-06-01 &nbsp;|&nbsp; 395 ordens ativas</span>
+  <nav>
+    <a href="#chegando">📦 Chegando</a>
+    <a href="#movimentacoes">📊 Movimentações</a>
+    <a href="#vencidos">🔴 Vencidos</a>
+    <a href="#sem-embarque">⚡ Sem Embarque</a>
+    <a href="#fornecedores">🏭 Fornecedores</a>
+  </nav>
 </header>
 
-<div class="cards">
-  
-        <div class="card">
-          <div class="card-title">Em Trânsito</div>
-          <div class="card-value" style="color:#0070D2">173</div>
-          <div class="card-sub">embarques ativos</div>
-        </div>
-  
-        <div class="card">
-          <div class="card-title">Chegando ≤7d</div>
-          <div class="card-value" style="color:#2E844A">112</div>
-          <div class="card-sub">ordens previstas</div>
-        </div>
-  
-        <div class="card">
-          <div class="card-title">Necessidade Vencida</div>
-          <div class="card-value" style="color:#BA0517">105</div>
-          <div class="card-sub">requerem atenção</div>
-        </div>
-  
-        <div class="card">
-          <div class="card-title">Sem Embarque</div>
-          <div class="card-value" style="color:#FE9339">168</div>
-          <div class="card-sub">pedido enviado</div>
-        </div>
-  
-        <div class="card">
-          <div class="card-title">Atrasos Hoje</div>
-          <div class="card-value" style="color:#C23934">0</div>
-          <div class="card-sub">1ª execução</div>
-        </div>
-  
-        <div class="card">
-          <div class="card-title">Antecipações</div>
-          <div class="card-value" style="color:#2E844A">0</div>
-          <div class="card-sub">1ª execução</div>
-        </div>
-</div>
+<main>
 
-<section>
-  <h2>&#128228; Chegando em até 7 dias <span class="count">112</span></h2>
-  <table><thead><tr><th>OC</th><th>Produto</th><th>Fornecedor</th><th>Chegada PO</th><th>Status</th></tr></thead><tbody><tr><td class="">OCBIO012224</td><td class="">CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012224</td><td class="">CATETER VENOSO CENTRAL T/L 7FR X 20CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012224</td><td class="">KIT CATETER HEMODIÁLISE T/L 12FR X 20CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012224</td><td class="">CATETER VENOSO CENTRAL S/L 14G 20CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012224</td><td class="">CATETER VENOSO CENTRAL S/L 16G 20CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012224</td><td class="">CATETER VENOSO CENTRAL D/L 4FR x 13CM</td><td class="">TARGET</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO013640</td><td class="">CATETER PULSE CATH IVAC 2L</td><td class="">PULSECATH</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO013327C</td><td class="">FIO GUIA T MSB 0.035"X180CM ANGULADO HIDROFILICO STIFF</td><td class="">MSB</td><td class="bold">01/06/2026</td><td class=""><span class="badge" style="background:#2E844A">HOJE</span></td></tr><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 150MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 120MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 200MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 2,5X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 3X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 5MM X 200MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA A LASER GLIDELIGHT P/EXTRACAO DE ELETRODO </td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 2,75X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 3,75X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 3,5X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013125</td><td class="">GERADOR IVL SONICO</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013124</td><td class="">CATETER IVL SONICO 4X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 40MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013218</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013473</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA A LASER GLIDELIGHT P/EXTRACAO DE ELETRODO </td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL 11F, 47.5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 11F 15,5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL 9F, 47.5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 9F 15,5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 10MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 13F 15,5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013539</td><td class="">BAINHA DILATADORA ROTATIVA TIGHTRAIL 13F, 47.5CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013125</td><td class="">CATETER IVL SONICO 4X12MM NE</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 35MM 5F 145cm</td><td class="">SINOMED</td><td class="bold">05/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 4d</span></td></tr><tr><td class="">OCBIO013518</td><td class="">CATETER IVL SONICO 3,5X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr><tr><td class="">OCBIO013518</td><td class="">CATETER IVL SONICO 3,75X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr><tr><td class="">OCBIO013518</td><td class="">CATETER IVL SONICO 3,25X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr><tr><td class="">OCBIO013518</td><td class="">CATETER IVL SONICO 2,75X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr><tr><td class="">OCBIO013518</td><td class="">CATETER IVL SONICO 4X12MM</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr><tr><td class="">OCBIO013519</td><td class="">GERADOR IVL SONICO</td><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td class=""><span class="badge" style="background:#0070D2">em 7d</span></td></tr></tbody></table>
-</section>
+  <div class="kpi-grid">
+        <div class="kpi-card blue">
+          <div class="kpi-icon">🚢</div>
+          <div class="kpi-label">Em Trânsito</div>
+          <div class="kpi-value">173</div>
+          <div class="kpi-sub">embarques ativos</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-icon">📬</div>
+          <div class="kpi-label">Chegando ≤ 7 dias</div>
+          <div class="kpi-value">112</div>
+          <div class="kpi-sub">ordens previstas</div>
+        </div>
+        <div class="kpi-card red">
+          <div class="kpi-icon">🔴</div>
+          <div class="kpi-label">Necessidade Vencida</div>
+          <div class="kpi-value">105</div>
+          <div class="kpi-sub">requerem atenção</div>
+        </div>
+        <div class="kpi-card amber">
+          <div class="kpi-icon">⚡</div>
+          <div class="kpi-label">Sem Embarque</div>
+          <div class="kpi-value">168</div>
+          <div class="kpi-sub">pedido enviado</div>
+        </div>
+        <div class="kpi-card red">
+          <div class="kpi-icon">⏰</div>
+          <div class="kpi-label">Atrasos Hoje</div>
+          <div class="kpi-value">0</div>
+          <div class="kpi-sub">1ª execução</div>
+        </div>
+        <div class="kpi-card green">
+          <div class="kpi-icon">🚀</div>
+          <div class="kpi-label">Antecipações</div>
+          <div class="kpi-value">0</div>
+          <div class="kpi-sub">1ª execução</div>
+        </div></div>
 
-<div class="grid2-wrap">
-  <section>
-    <h2>&#9989; Atrasos de Data <span class="count">0</span></h2>
-    <p class="empty">Primeira execução — sem comparativo.</p>
-  </section>
-  <section>
-    <h2>&#128640; Antecipações <span class="count">0</span></h2>
-    <p class="empty">Primeira execução — sem comparativo.</p>
-  </section>
-</div>
+  <div id="chegando" class="section">
+    <div class="sec-hdr">
+      <span class="sec-icon">📦</span>
+      <span class="sec-title">Chegando em até 7 dias</span>
+      <span class="sec-badge green">112 ordens</span>
+    </div>
+    <div class="table-wrap scrollable"><table><thead><tr><th>Ordem de Compra</th><th>Produto</th><th>Fornecedor</th><th>Chegada PO</th><th>Fase</th><th>Status</th></tr></thead><tbody><tr><td class="mono">OCBIO012224</td><td>CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012224</td><td>CATETER VENOSO CENTRAL T/L 7FR X 20CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012224</td><td>KIT CATETER HEMODIÁLISE T/L 12FR X 20CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012224</td><td>CATETER VENOSO CENTRAL S/L 14G 20CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012224</td><td>CATETER VENOSO CENTRAL S/L 16G 20CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012224</td><td>CATETER VENOSO CENTRAL D/L 4FR x 13CM</td><td class="dim">TARGET</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO013640</td><td>CATETER PULSE CATH IVAC 2L</td><td class="dim">PULSECATH</td><td class="bold">01/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO013327C</td><td>FIO GUIA T MSB 0.035"X180CM ANGULADO HIDROFILICO STIFF</td><td class="dim">MSB</td><td class="bold">01/06/2026</td><td><span class="phase phase-enviado">Pedido Enviado</span></td><td><span class="badge badge-solid-green">HOJE</span></td></tr><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 150MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 120MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 200MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 2,5X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 3X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 5MM X 200MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA A LASER GLIDELIGHT P/EXTRACAO DE ELETRODO </td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 2,75X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.50 MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 3,75X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 3,5X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013125</td><td>GERADOR IVL SONICO</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013124</td><td>CATETER IVL SONICO 4X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 40MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013218</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013473</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.25MM x 15MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA A LASER GLIDELIGHT P/EXTRACAO DE ELETRODO </td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL 11F, 47.5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 11F 15,5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.50MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL 9F, 47.5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 9F 15,5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 10MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL SUB C 13F 15,5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013539</td><td>BAINHA DILATADORA ROTATIVA TIGHTRAIL 13F, 47.5CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013125</td><td>CATETER IVL SONICO 4X12MM NE</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.25MM x 35MM 5F 145cm</td><td class="dim">SINOMED</td><td class="bold">05/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 4d</span></td></tr><tr><td class="mono">OCBIO013518</td><td>CATETER IVL SONICO 3,5X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr><tr><td class="mono">OCBIO013518</td><td>CATETER IVL SONICO 3,75X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr><tr><td class="mono">OCBIO013518</td><td>CATETER IVL SONICO 3,25X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr><tr><td class="mono">OCBIO013518</td><td>CATETER IVL SONICO 2,75X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr><tr><td class="mono">OCBIO013518</td><td>CATETER IVL SONICO 4X12MM</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr><tr><td class="mono">OCBIO013519</td><td>GERADOR IVL SONICO</td><td class="dim">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="bold">08/06/2026</td><td><span class="phase phase-transito">Em trânsito</span></td><td><span class="badge badge-blue">em 7d</span></td></tr></tbody></table></div>
+  </div>
 
-<section>
-  <h2>&#128308; Necessidade Vencida — Top 20 <span class="warn">105</span></h2>
-  <table><thead><tr><th>OC</th><th>Produto</th><th>Fornecedor</th><th>Necessidade</th><th>Chegada PO</th><th>Atraso</th></tr></thead><tbody><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 150MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 120MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 200MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 5MM X 200MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012506A</td><td class="">ENXERTO RETO COLAGENO 28 X 300MM</td><td class="">VUP</td><td class="">01/04/2026</td><td class="">—</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012506A</td><td class="">ENXERTO RETO COLAGENO 30 X 300MM</td><td class="">VUP</td><td class="">01/04/2026</td><td class="">—</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012477A</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012506A</td><td class="">ENXERTO RETO COLAGENO 32 X 300MM</td><td class="">VUP</td><td class="">01/04/2026</td><td class="">—</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012477F</td><td class="">CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="">01/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012506A</td><td class="">ENXERTO RETO COLAGENO 26 X 300MM</td><td class="">VUP</td><td class="">01/04/2026</td><td class="">—</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012506A</td><td class="">ENXERTO RETO COLAGENO 34 X 300MM</td><td class="">VUP</td><td class="">01/04/2026</td><td class="">—</td><td class="bold"><span class="badge" style="background:#BA0517">61d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 25MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 20MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr><tr><td class="">OCBIO012910</td><td class="">HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 30MM 5F 145cm</td><td class="">SINOMED</td><td class="">02/04/2026</td><td class="">05/06/2026</td><td class="bold"><span class="badge" style="background:#BA0517">60d</span></td></tr></tbody></table>
-</section>
+  <div id="movimentacoes" class="grid-2">
+    <div class="section">
+      <div class="sec-hdr">
+        <span class="sec-icon">⏰</span>
+        <span class="sec-title">Atrasos de Data</span>
+        <span class="sec-badge green">0 hoje</span>
+      </div>
+      <div class="empty-state"><div class="empty-icon">ℹ️</div><div class="empty-text">Primeira execução — sem comparativo.</div></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr">
+        <span class="sec-icon">🚀</span>
+        <span class="sec-title">Antecipações</span>
+        <span class="sec-badge blue">0 hoje</span>
+      </div>
+      <div class="empty-state"><div class="empty-icon">ℹ️</div><div class="empty-text">Primeira execução — sem comparativo.</div></div>
+    </div>
+  </div>
 
-<section>
-  <h2>&#9889; Pedido Enviado sem Embarque <span class="warn">168</span></h2>
-  <table><thead><tr><th>OC</th><th>Produto</th><th>Fornecedor</th><th>Necessidade</th></tr></thead><tbody><tr><td class="">OCBIO013866</td><td class="">PULSEIRA BIOMEDICAL IDENTIFICAÇÃO TRIFTY ADU/PED VERMELHA</td><td class="">GOJU</td><td class="">01/09/2026</td></tr><tr><td class="">OCBIO013866</td><td class="">PULSEIRA BIOMEDICAL DE IDENTIFIC. SUPERBAND LAVANDA - RISCO </td><td class="">GOJU</td><td class="">01/09/2026</td></tr><tr><td class="">OCBIO013701</td><td class="">CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="">TARGET</td><td class="">03/08/2026</td></tr><tr><td class="">OCBIO013541</td><td class="">CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="">TARGET</td><td class="">10/08/2026</td></tr><tr><td class="">OCBIO013685</td><td class="">CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="">TARGET</td><td class="">03/08/2026</td></tr><tr><td class="">OCBIO013685</td><td class="">CATETER VENOSO CENTRAL T/L 7FR X 20CM</td><td class="">TARGET</td><td class="">03/08/2026</td></tr><tr><td class="">OCBIO013541</td><td class="">KIT CATETER HEMODIÁLISE D/L 12FR X 20CM</td><td class="">TARGET</td><td class="">10/08/2026</td></tr><tr><td class="">OCBIO013866</td><td class="">PULSEIRA BIOMEDICAL ADULTO/PED SCANBAND DR BRANCA (ROLO C/ 2</td><td class="">GOJU</td><td class="">01/09/2026</td></tr><tr><td class="">OCBIO013472</td><td class="">INTRODUTOR FEMORAL 6FR, 11CM DILAT. 17CM GUIA .035"X45CM A18</td><td class="">KDL</td><td class="">01/08/2026</td></tr><tr><td class="">OCBIO013472</td><td class="">MANIFOLD 3 PORTAS, DIREITA, ON, 500 PSI</td><td class="">KDL</td><td class="">01/08/2026</td></tr><tr><td class="">OCBIO013541</td><td class="">KIT CATETER HEMODIÁLISE D/L 12FR X 16CM</td><td class="">TARGET</td><td class="">10/08/2026</td></tr><tr><td class="">OCBIO013866</td><td class="">PULSEIRA BIOMEDICAL ADULTO/PED SOFT W/NEW COMPUBAND BRANCA, </td><td class="">GOJU</td><td class="">01/09/2026</td></tr><tr><td class="">OCBIO013472</td><td class="">INTRODUTOR FEMORAL 5FR, 11CM DILAT. 17CM GUIA .035"X45CM A18</td><td class="">KDL</td><td class="">01/08/2026</td></tr><tr><td class="">OCBIO013701</td><td class="">KIT CATETER HEMODIÁLISE D/L 12FR X 20CM</td><td class="">TARGET</td><td class="">03/08/2026</td></tr><tr><td class="">OCBIO013472</td><td class="">INTRODUTOR RAD. HIDROFÍLICO  5Fr, 11CM  DILAT. 17CM GUIA 021</td><td class="">KDL</td><td class="">01/08/2026</td></tr></tbody></table>
-</section>
+  <div id="vencidos" class="section">
+    <div class="sec-hdr">
+      <span class="sec-icon">🔴</span>
+      <span class="sec-title">Necessidade Vencida — Top 20</span>
+      <span class="sec-badge red">105 itens</span>
+    </div>
+    <div class="table-wrap scrollable"><table><thead><tr><th>Ordem de Compra</th><th>Produto</th><th>Fornecedor</th><th>Necessidade</th><th>Chegada PO</th><th>Atraso</th></tr></thead><tbody><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 150MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 120MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 200MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 5MM X 200MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012506A</td><td>ENXERTO RETO COLAGENO 28 X 300MM</td><td class="dim">VUP</td><td>01/04/2026</td><td>—</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012506A</td><td>ENXERTO RETO COLAGENO 30 X 300MM</td><td class="dim">VUP</td><td>01/04/2026</td><td>—</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012477A</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012506A</td><td>ENXERTO RETO COLAGENO 32 X 300MM</td><td class="dim">VUP</td><td>01/04/2026</td><td>—</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012477F</td><td>CATETER BALAO FARMACOLOGICO STELLAREX 6MM X 80MM X 135CM</td><td class="dim">PHILIPS MEDICAL SYSTEMS</td><td>01/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012506A</td><td>ENXERTO RETO COLAGENO 26 X 300MM</td><td class="dim">VUP</td><td>01/04/2026</td><td>—</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012506A</td><td>ENXERTO RETO COLAGENO 34 X 300MM</td><td class="dim">VUP</td><td>01/04/2026</td><td>—</td><td class="bold"><span class="badge badge-solid-red">61d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 3.00MM x 25MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 4.00MM x 20MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.50MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr><tr><td class="mono">OCBIO012910</td><td>HT SUPREME STENT FARMACOLOGICO COCR 2.75MM x 30MM 5F 145cm</td><td class="dim">SINOMED</td><td>02/04/2026</td><td>05/06/2026</td><td class="bold"><span class="badge badge-red">60d</span></td></tr></tbody></table></div><div class="truncate-note">+85 itens adicionais não exibidos</div>
+  </div>
 
-<section>
-  <h2>&#128202; Resumo por Fornecedor</h2>
-  <table><thead><tr><th>Fornecedor</th><th>Linhas</th><th>Unidades</th></tr></thead><tbody><tr><td class="">SINOMED</td><td class="center">160</td><td class="right">4.837</td></tr><tr><td class="">TARGET</td><td class="center">56</td><td class="right">145.940</td></tr><tr><td class="">PHILIPS MEDICAL SYSTEMS</td><td class="center">51</td><td class="right">1.238</td></tr><tr><td class="">GOJU</td><td class="center">45</td><td class="right">207.808</td></tr><tr><td class="">MSB</td><td class="center">22</td><td class="right">3.360</td></tr><tr><td class="">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</td><td class="center">20</td><td class="right">222</td></tr><tr><td class="">KDL</td><td class="center">14</td><td class="right">14.120</td></tr><tr><td class="">VUP</td><td class="center">13</td><td class="right">310</td></tr><tr><td class="">LUCAS</td><td class="center">12</td><td class="right">1.248</td></tr><tr><td class="">PULSECATH</td><td class="center">2</td><td class="right">8</td></tr></tbody></table>
-</section>
+  <div id="sem-embarque" class="section">
+    <div class="sec-hdr">
+      <span class="sec-icon">⚡</span>
+      <span class="sec-title">Pedido Enviado sem Embarque</span>
+      <span class="sec-badge amber">168 itens</span>
+    </div>
+    <div class="table-wrap scrollable"><table><thead><tr><th>Ordem de Compra</th><th>Produto</th><th>Fornecedor</th><th>Necessidade</th></tr></thead><tbody><tr><td class="mono">OCBIO013866</td><td>PULSEIRA BIOMEDICAL IDENTIFICAÇÃO TRIFTY ADU/PED VERMELHA</td><td class="dim">GOJU</td><td>01/09/2026</td></tr><tr><td class="mono">OCBIO013866</td><td>PULSEIRA BIOMEDICAL DE IDENTIFIC. SUPERBAND LAVANDA - RISCO </td><td class="dim">GOJU</td><td>01/09/2026</td></tr><tr><td class="mono">OCBIO013701</td><td>CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="dim">TARGET</td><td>03/08/2026</td></tr><tr><td class="mono">OCBIO013541</td><td>CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="dim">TARGET</td><td>10/08/2026</td></tr><tr><td class="mono">OCBIO013685</td><td>CATETER VENOSO CENTRAL D/L 7FR X 20CM</td><td class="dim">TARGET</td><td>03/08/2026</td></tr><tr><td class="mono">OCBIO013685</td><td>CATETER VENOSO CENTRAL T/L 7FR X 20CM</td><td class="dim">TARGET</td><td>03/08/2026</td></tr><tr><td class="mono">OCBIO013541</td><td>KIT CATETER HEMODIÁLISE D/L 12FR X 20CM</td><td class="dim">TARGET</td><td>10/08/2026</td></tr><tr><td class="mono">OCBIO013866</td><td>PULSEIRA BIOMEDICAL ADULTO/PED SCANBAND DR BRANCA (ROLO C/ 2</td><td class="dim">GOJU</td><td>01/09/2026</td></tr><tr><td class="mono">OCBIO013472</td><td>INTRODUTOR FEMORAL 6FR, 11CM DILAT. 17CM GUIA .035"X45CM A18</td><td class="dim">KDL</td><td>01/08/2026</td></tr><tr><td class="mono">OCBIO013472</td><td>MANIFOLD 3 PORTAS, DIREITA, ON, 500 PSI</td><td class="dim">KDL</td><td>01/08/2026</td></tr><tr><td class="mono">OCBIO013541</td><td>KIT CATETER HEMODIÁLISE D/L 12FR X 16CM</td><td class="dim">TARGET</td><td>10/08/2026</td></tr><tr><td class="mono">OCBIO013866</td><td>PULSEIRA BIOMEDICAL ADULTO/PED SOFT W/NEW COMPUBAND BRANCA, </td><td class="dim">GOJU</td><td>01/09/2026</td></tr><tr><td class="mono">OCBIO013472</td><td>INTRODUTOR FEMORAL 5FR, 11CM DILAT. 17CM GUIA .035"X45CM A18</td><td class="dim">KDL</td><td>01/08/2026</td></tr><tr><td class="mono">OCBIO013701</td><td>KIT CATETER HEMODIÁLISE D/L 12FR X 20CM</td><td class="dim">TARGET</td><td>03/08/2026</td></tr><tr><td class="mono">OCBIO013472</td><td>INTRODUTOR RAD. HIDROFÍLICO  5Fr, 11CM  DILAT. 17CM GUIA 021</td><td class="dim">KDL</td><td>01/08/2026</td></tr></tbody></table></div><div class="truncate-note">+153 itens adicionais não exibidos</div>
+  </div>
 
-<footer>Follow-up Biomedical &mdash; 2026-06-01 &mdash; gerado automaticamente</footer>
+  <div id="fornecedores" class="section">
+    <div class="sec-hdr">
+      <span class="sec-icon">🏭</span>
+      <span class="sec-title">Resumo por Fornecedor</span>
+      <span class="sec-badge blue">10 fornecedores</span>
+    </div>
+    
+        <div class="forn-row">
+          <div class="forn-name" title="SINOMED">SINOMED</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:100%"></div></div>
+              <span class="bar-val blue">160</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:2%"></div></div>
+              <span class="bar-val green">4.837</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="TARGET">TARGET</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:35%"></div></div>
+              <span class="bar-val blue">56</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:70%"></div></div>
+              <span class="bar-val green">145.940</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="PHILIPS MEDICAL SYSTEMS">PHILIPS MEDICAL SYSTEMS</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:32%"></div></div>
+              <span class="bar-val blue">51</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:1%"></div></div>
+              <span class="bar-val green">1.238</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="GOJU">GOJU</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:28%"></div></div>
+              <span class="bar-val blue">45</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:100%"></div></div>
+              <span class="bar-val green">207.808</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="MSB">MSB</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:14%"></div></div>
+              <span class="bar-val blue">22</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:2%"></div></div>
+              <span class="bar-val green">3.360</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.">AN HUA HENG JI BEIJING TECHNOLOGY CO., LTD.</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:12%"></div></div>
+              <span class="bar-val blue">20</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:0%"></div></div>
+              <span class="bar-val green">222</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="KDL">KDL</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:9%"></div></div>
+              <span class="bar-val blue">14</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:7%"></div></div>
+              <span class="bar-val green">14.120</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="VUP">VUP</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:8%"></div></div>
+              <span class="bar-val blue">13</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:0%"></div></div>
+              <span class="bar-val green">310</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="LUCAS">LUCAS</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:8%"></div></div>
+              <span class="bar-val blue">12</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:1%"></div></div>
+              <span class="bar-val green">1.248</span>
+            </div>
+          </div>
+        </div>
+        <div class="forn-row">
+          <div class="forn-name" title="PULSECATH">PULSECATH</div>
+          <div class="forn-bars">
+            <div class="bar-row">
+              <span class="bar-lbl">Linhas</span>
+              <div class="bar-track"><div class="bar-fill blue" style="width:1%"></div></div>
+              <span class="bar-val blue">2</span>
+            </div>
+            <div class="bar-row">
+              <span class="bar-lbl">Unid.</span>
+              <div class="bar-track"><div class="bar-fill green" style="width:0%"></div></div>
+              <span class="bar-val green">8</span>
+            </div>
+          </div>
+        </div>
+  </div>
+
+</main>
+
+<footer>
+  Follow-up Biomedical &mdash; dados de 01/06/2026 &mdash; gerado automaticamente
+</footer>
+
+<script>
+(function() {
+  // Stale banner
+  var iso = '2026-06-01';
+  var fileDate = new Date(iso); fileDate.setHours(0,0,0,0);
+  var now = new Date(); now.setHours(0,0,0,0);
+  var diff = Math.round((now - fileDate) / 86400000);
+  if (diff > 0) {
+    var b = document.getElementById('stale-banner');
+    b.style.display = 'block';
+    b.textContent = '⚠️  Dashboard desatualizado — dados de ' + iso + ' (' + diff + ' dia(s) atrás). Acesse a URL original para ver os dados de hoje.';
+  }
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('nav a').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var id = this.getAttribute('href').slice(1);
+      var el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+    });
+  });
+})();
+</script>
 </body>
 </html>
