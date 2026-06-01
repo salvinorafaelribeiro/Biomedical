@@ -118,7 +118,7 @@ main{max-width:1380px;margin:0 auto;padding:24px 32px}
 
 /* Tables */
 .table-wrap{overflow-x:auto}
-.table-wrap.scrollable{max-height:380px;overflow-y:auto}
+.table-wrap.scrollable{max-height:520px;overflow-y:auto}
 table{width:100%;border-collapse:collapse}
 thead th{background:#F8FAFC;padding:10px 16px;text-align:left;font-size:11px;
   font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--txt2);
@@ -436,7 +436,7 @@ function renderOverdue(rows){
     ['Ordem de Compra','Produto','Fornecedor','Família','Necessidade','Chegada PO','Atraso'],rows,
     r=>td(esc(r.OC),'mono')+td(esc(r.Produto))+td(esc(r.Fornecedor),'dim')+td(esc(r.Familia),'dim')+
        td(r.Necessidade||'—')+td(r.ChegadaPO||'—')+td(overdueBadge(r.Atraso),'bold'),
-    {empty:'Nenhum item com necessidade vencida.',icon:'✅',scroll:true,max:20}
+    {empty:'Nenhum item com necessidade vencida.',icon:'✅',scroll:true}
   );
 }
 
@@ -445,7 +445,7 @@ function renderNoShip(rows){
     ['Ordem de Compra','Produto','Fornecedor','Família','Necessidade'],rows,
     r=>td(esc(r.OC),'mono')+td(esc(r.Produto))+td(esc(r.Fornecedor),'dim')+
        td(esc(r.Familia),'dim')+td(r.Necessidade||'—'),
-    {empty:'Todos os pedidos enviados possuem embarque definido.',icon:'✅',scroll:true,max:15}
+    {empty:'Todos os pedidos enviados possuem embarque definido.',icon:'✅',scroll:true}
   );
 }
 
@@ -477,7 +477,7 @@ function renderFatOverdue(rows){
     r=>td(esc(r.OC),'mono')+td(esc(r.Produto))+td(esc(r.Fornecedor),'dim')+td(esc(r.Familia),'dim')+
        td(r.FatSolicitada||'—','bold')+td(r.ChegadaPO||'—')+td(r.Necessidade||'—')+
        td(overdueBadge(r.Atraso),'bold')+td(phaseBadge(r.Fase)),
-    {empty:'Nenhum item com faturamento vencido.',icon:'✅',scroll:true,max:20}
+    {empty:'Nenhum item com faturamento vencido.',icon:'✅',scroll:true}
   );
 }
 
